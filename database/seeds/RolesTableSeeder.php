@@ -14,22 +14,15 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-      $owner = new Role;
-      $owner->name = 'owner';
-      $owner->display_name = 'Project Owner';
-      $owner->description = 'User is the owner of a given project';
-      $owner->save();
+      // Role::truncate();
 
-      $admin = new Role;
-      $admin->name = 'admin';
-      $admin->display_name = 'User Administrator';
-      $admin->description = 'User is allowed to manage and edit other users';
-      $admin->save();
+      Role::create(['name'=>'admin','display_name'=>'Administrator','description'=>'User Administrator']);
+      Role::create(['name'=>'member','display_name'=>'Member','description'=>'User Member']);
 
       $user = User::where('name','Revando')->first();
       $user->attachRole(1); // 1 adalah id dari role owner
 
-      $user2 = User::where('name','Ichsan Firdaus')->first();
+      $user2 = User::where('name','Kotaro Minami')->first();
       $user2->attachRole(2); // 2 adalah id dari role admin
     }
 }

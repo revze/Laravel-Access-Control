@@ -47,15 +47,34 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                  @role('admin')
+                  <li><a href="{{ url('roles') }}">Access Control</a></li>
+                  @endrole
+                  @permission('read-category')
+                  <li><a href="{{ url('categories') }}">Category</a></li>
+                  @endpermission
+                  @permission('read-article')
+                  <li><a href="{{ url('articles') }}">Article</a></li>
+                  @endpermission
+                  @permission('read-comment')
+                  <li><a href="{{ url('comments') }}">Comment</a></li>
+                  @endpermission
+                  @permission('setting-profile')
+                  <li><a href="{{ url('profile') }}">Profile</a></li>
+                  @endpermission
+                  @permission('setting-privacy-policy')
+                  <li><a href="{{ url('privacy-policy') }}">Privacy & Policy</a></li>
+                  @endpermission
+                  @permission('setting-language')
+                  <li><a href="{{ url('language') }}">Language</a></li>
+                  @endpermission
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                         <li><a href="{{ url('/login') }}">Login</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -77,6 +96,12 @@
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function checkAll(no){
+        var checkbox = $('.check-'+no);
+        $('.check-'+no).prop('checked', $('#check-'+no).prop("checked"));
+      }
+    </script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
